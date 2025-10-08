@@ -1,0 +1,21 @@
+-- Trigger to record updates
+DELIMITER $$
+CREATE TRIGGER trg_account_update
+BEFORE UPDATE ON accounts_current
+FOR EACH ROW
+BEGIN
+  INSERT INTO accounts_history(account_id, customer_name, balance, currency, status, operation, changed_by)
+  VALUES(OLD.account_id, OLD.customer_name, OLD.balance, OLD.currency, OLD.status, 'UPDATE', USER());
+END$$
+DELIMITER ;
+
+-- Trigger to record new inserts
+DELIMITER $$
+CREATE TRIGGER trg_account_insert
+AFTER INSERT ON accounts_current
+FOR EACH ROW
+BEGIN
+  INSERT INTO accounts_history(account_id, customer_name, balance, currency, status, operation, changed_by)
+  VALUES(NEW.account_id, NEW.customer_name, NEW.balance, NEW.currency, NEW.status, 'INSERT', USER());
+END$$
+DELIMITER ;
