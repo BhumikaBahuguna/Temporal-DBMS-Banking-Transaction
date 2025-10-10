@@ -1,8 +1,10 @@
 --  Create a new database
+
 CREATE DATABASE temporal_bank;
 USE temporal_bank;
 
 --  Table for current accounts
+
 CREATE TABLE accounts_current (
   account_id INT AUTO_INCREMENT PRIMARY KEY,
   customer_name VARCHAR(100) NOT NULL,
@@ -13,6 +15,7 @@ CREATE TABLE accounts_current (
 );
 
 -- Table for transaction history
+
 CREATE TABLE accounts_history (
   hist_id INT AUTO_INCREMENT PRIMARY KEY,
   account_id INT,
@@ -27,11 +30,13 @@ CREATE TABLE accounts_history (
 );
 
 -- show table with columns
+
 SHOW TABLES;
 DESC accounts_current;
 DESC accounts_history;
 
 -- load the CSV file 
+
 SHOW VARIABLES LIKE 'secure_file_priv';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/accounts.csv'
 INTO TABLE accounts_current
@@ -40,3 +45,12 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (account_id, customer_name, balance, currency, status);
 SELECT * FROM accounts_current;
+
+
+-- to update 
+
+UPDATE accounts_current SET balance = balance + 100 WHERE account_id = 1;
+SELECT * FROM accounts_history WHERE account_id = 1;
+
+UPDATE accounts_current SET balance = balance + 1000 WHERE account_id = 3;
+SELECT * FROM accounts_history WHERE account_id = 3;
