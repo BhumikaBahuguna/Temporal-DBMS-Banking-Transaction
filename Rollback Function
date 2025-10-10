@@ -1,0 +1,48 @@
+DROP PROCEDURE IF EXISTS rollback_account;
+
+DELIMITER //
+CREATE PROCEDURE rollback_account(IN acc_id INT, IN rollback_time DATETIME)
+BEGIN
+  DECLARE old_balance DECIMAL(15,2);
+  DECLARE record_found INT DEFAULT 0;
+
+  -- Try to get the last known balance before or at rollback time
+  SELECT balance INTO old_balance
+  FROM accounts_history
+  WHERE account_id = acc_id
+    AND tx_time <= rollback_time
+  ORDER BY tx_time DESC
+  LIMIT 1;
+
+  -- Check if a record was found
+  IF old_balance IS NOT NULL THEN
+    SET record_found = 1;
+  END IF;
+
+  -- If record found, perform rollback
+  IF record_found = 1 THEN
+    UPDATE accounts_current
+    SET balance = old_balance
+    WHERE account_id = acc_id;
+
+    INSERT INTO accounts_history(account_id, customer_name, balance, currency, txn_type, operation)
+    SELECT account_id, customer_name, balance, currency, 'ROLLBACK', 'ROLLBACK'
+    FROM accounts_current
+    WHERE account_id = acc_id;
+  ELSE
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'No valid history found before given time — rollback cancelled';
+  END IF;
+END;
+//
+DELIMITER ;
+
+--  to test this function
+
+CALL rollback_account(3, '2025-10-11 00:31:52');
+SELECT * FROM accounts_current WHERE account_id = 3;
+
+
+
+
+
