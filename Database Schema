@@ -1,28 +1,42 @@
--- Step 1: Create a new database
+--  Create a new database
 CREATE DATABASE temporal_bank;
 USE temporal_bank;
 
--- Step 2: Table for current accounts
+--  Table for current accounts
 CREATE TABLE accounts_current (
   account_id INT AUTO_INCREMENT PRIMARY KEY,
   customer_name VARCHAR(100) NOT NULL,
   balance DECIMAL(15,2) NOT NULL DEFAULT 0.00,
   currency VARCHAR(5) DEFAULT 'INR',
   status VARCHAR(20) DEFAULT 'active',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Step 3: Table for transaction history
+-- Table for transaction history
 CREATE TABLE accounts_history (
   hist_id INT AUTO_INCREMENT PRIMARY KEY,
-  account_id INT NOT NULL,
+  account_id INT,
   customer_name VARCHAR(100),
   balance DECIMAL(15,2),
   currency VARCHAR(5),
-  status VARCHAR(20),
+  txn_id INT,
+  txn_type VARCHAR(20),
   operation VARCHAR(20),
-  changed_by VARCHAR(100),
   tx_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (account_id) REFERENCES accounts_current(account_id)
 );
+
+-- show table with columns
+SHOW TABLES;
+DESC accounts_current;
+DESC accounts_history;
+
+-- load the CSV file 
+SHOW VARIABLES LIKE 'secure_file_priv';
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/accounts.csv'
+INTO TABLE accounts_current
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(account_id, customer_name, balance, currency, status);
+SELECT * FROM accounts_current;
