@@ -1,0 +1,15 @@
+DELIMITER //
+CREATE PROCEDURE get_balance_as_of(IN acc_id INT, IN as_of_time DATETIME)
+BEGIN
+  SELECT account_id, customer_name, balance, currency, tx_time, operation
+  FROM accounts_history
+  WHERE account_id = acc_id
+    AND tx_time <= as_of_time
+  ORDER BY tx_time DESC
+  LIMIT 1;
+END;
+//
+DELIMITER ;
+
+--test with 
+CALL get_balance_as_of(1, '2025-10-10 22:00:00');
