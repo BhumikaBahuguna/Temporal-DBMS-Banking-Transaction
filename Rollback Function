@@ -1,4 +1,3 @@
-DROP PROCEDURE IF EXISTS rollback_account;
 
 DELIMITER //
 CREATE PROCEDURE rollback_account(IN acc_id INT, IN rollback_time DATETIME)
@@ -7,6 +6,7 @@ BEGIN
   DECLARE record_found INT DEFAULT 0;
 
   -- Try to get the last known balance before or at rollback time
+
   SELECT balance INTO old_balance
   FROM accounts_history
   WHERE account_id = acc_id
@@ -15,11 +15,13 @@ BEGIN
   LIMIT 1;
 
   -- Check if a record was found
+
   IF old_balance IS NOT NULL THEN
     SET record_found = 1;
   END IF;
 
   -- If record found, perform rollback
+
   IF record_found = 1 THEN
     UPDATE accounts_current
     SET balance = old_balance
