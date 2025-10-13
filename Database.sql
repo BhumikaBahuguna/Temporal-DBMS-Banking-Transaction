@@ -22,6 +22,7 @@ CREATE TABLE accounts_history (
   tx_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (account_id) REFERENCES accounts_current(account_id)
 );
+
 SHOW TABLES;
 DESC accounts_current;
 DESC accounts_history;
@@ -50,10 +51,6 @@ END;
 //
 DELIMITER ;
 
-DROP TRIGGER IF EXISTS after_account_update;
-DROP TRIGGER IF EXISTS after_deposit;
-DROP TRIGGER IF EXISTS after_withdrawal;
-
 DELIMITER //
 CREATE TRIGGER after_account_update
 AFTER UPDATE ON accounts_current
@@ -70,7 +67,6 @@ END;
 //
 DELIMITER ;
 
-DROP TRIGGER IF EXISTS after_account_delete;
 DELIMITER //
 CREATE TRIGGER after_account_delete
 AFTER DELETE ON accounts_current
@@ -108,10 +104,10 @@ UPDATE accounts_current SET balance = balance + 50 WHERE account_id = 2;
 SELECT * FROM accounts_history WHERE account_id = 2;
 
 -- check AS OF 
+
 CALL get_balance_as_of(2, '2025-10-11 00:23:13');
 SELECT * FROM accounts_current WHERE account_id = 2;
 
-DROP PROCEDURE IF EXISTS rollback_account;
 
 -- rollback function
 
