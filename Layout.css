@@ -1,0 +1,244 @@
+/* Layout Styles */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4) 0;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+}
+
+.logo-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.logo-icon {
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-2);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+}
+
+.logo-text h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.logo-text p {
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Desktop Navigation */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+}
+
+.nav-link-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-weight: 500;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--radius-md);
+  transition: background 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Navigation */
+.nav-mobile {
+  background: var(--primary-blue-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.nav-link-mobile {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+.nav-link-mobile:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-mobile.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link-mobile:last-child {
+  border-bottom: none;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: var(--spacing-8) 0;
+}
+
+.page-content {
+  min-height: 60vh;
+}
+
+/* Footer */
+.footer {
+  background: var(--neutral-800);
+  color: var(--neutral-300);
+  padding: var(--spacing-8) 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--spacing-6);
+}
+
+.footer-link {
+  color: var(--neutral-400);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .header-content {
+    padding: var(--spacing-3) 0;
+  }
+  
+  .logo-text h1 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .logo-text p {
+    font-size: var(--font-size-xs);
+  }
+  
+  .main-content {
+    padding: var(--spacing-6) 0;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-3);
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-content {
+    gap: var(--spacing-2);
+  }
+  
+  .logo-icon {
+    font-size: 1.5rem;
+    padding: var(--spacing-1);
+  }
+  
+  .logo-text h1 {
+    font-size: var(--font-size-base);
+  }
+  
+  .logo-text p {
+    display: none;
+  }
+}
