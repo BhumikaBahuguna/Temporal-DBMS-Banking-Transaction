@@ -37,3 +37,19 @@ and get the answer directly from the database!
 
 ✅ Error Correction
 → View and restore old account states safely.
+
+🗂️ Database Flow
+             ┌────────────────────────────┐
+             │        Transactions         │
+             └──────────────┬─────────────┘
+                            │
+                 (TRIGGER fires automatically)
+                            │
+       ┌────────────────────┴────────────────────┐
+       │                                         │
+┌───────────────┐                       ┌────────────────┐
+│ Current Table │   <-- latest state --> │ History Table  │
+└───────────────┘                       └────────────────┘
+        │                                         │
+        ▼                                         ▼
+   User Queries                            Time-Travel Queries
