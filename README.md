@@ -39,6 +39,8 @@ and get the answer directly from the database!
 → View and restore old account states safely.
 
 🗂️ Database Flow
+
+```
              ┌────────────────────────────┐
              │        Transactions         │
              └──────────────┬─────────────┘
@@ -53,3 +55,4 @@ and get the answer directly from the database!
         │                                         │
         ▼                                         ▼
    User Queries                            Time-Travel Queries
+```
