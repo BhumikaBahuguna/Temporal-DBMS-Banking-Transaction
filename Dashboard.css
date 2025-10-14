@@ -1,0 +1,328 @@
+/* Dashboard Styles */
+.dashboard {
+  padding: var(--spacing-6) 0;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.dashboard-header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--neutral-800);
+  margin-bottom: var(--spacing-2);
+}
+
+.dashboard-header p {
+  font-size: var(--font-size-lg);
+  color: var(--neutral-600);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+}
+
+.stat-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--neutral-200);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  background: var(--neutral-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.stat-content h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--neutral-800);
+  margin-bottom: var(--spacing-1);
+}
+
+.stat-content p {
+  font-size: var(--font-size-sm);
+  color: var(--neutral-600);
+  margin: 0;
+}
+
+/* Dashboard Controls */
+.dashboard-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+  flex-wrap: wrap;
+}
+
+.search-container {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neutral-400);
+  width: 20px;
+  height: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-10);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.filter-icon {
+  color: var(--neutral-400);
+  width: 20px;
+  height: 20px;
+}
+
+.filter-select {
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  background: white;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+}
+
+.sort-btn {
+  padding: var(--spacing-3);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-md);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-btn:hover {
+  background: var(--neutral-50);
+  border-color: var(--primary-blue);
+}
+
+/* Accounts Table */
+.accounts-table-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--neutral-200);
+}
+
+.accounts-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.accounts-table th {
+  background: var(--neutral-50);
+  padding: var(--spacing-4);
+  text-align: left;
+  font-weight: 600;
+  color: var(--neutral-700);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--neutral-200);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.accounts-table th:hover {
+  background: var(--neutral-100);
+}
+
+.sort-indicator {
+  margin-left: var(--spacing-2);
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.accounts-table td {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--neutral-200);
+  font-size: var(--font-size-sm);
+}
+
+.account-row:hover {
+  background: var(--neutral-50);
+}
+
+.account-id {
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.customer-name {
+  font-weight: 500;
+  color: var(--neutral-800);
+}
+
+.balance {
+  font-weight: 600;
+  font-size: var(--font-size-base);
+}
+
+.currency {
+  color: var(--neutral-600);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.actions {
+  text-align: right;
+}
+
+/* Loading State */
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+  gap: var(--spacing-4);
+}
+
+.dashboard-loading .loading-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.dashboard-loading p {
+  color: var(--neutral-600);
+  font-size: var(--font-size-lg);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: var(--spacing-12);
+  color: var(--neutral-600);
+}
+
+.no-results p {
+  font-size: var(--font-size-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-container {
+    min-width: auto;
+  }
+  
+  .filter-container {
+    justify-content: space-between;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+  
+  .stat-card {
+    padding: var(--spacing-4);
+  }
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .stat-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .accounts-table-container {
+    overflow-x: auto;
+  }
+  
+  .accounts-table {
+    min-width: 600px;
+  }
+  
+  .accounts-table th,
+  .accounts-table td {
+    padding: var(--spacing-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .dashboard-header p {
+    font-size: var(--font-size-base);
+  }
+  
+  .stat-content h3 {
+    font-size: var(--font-size-xl);
+  }
+}
