@@ -145,7 +145,7 @@ END;
 //
 DELIMITER ;
 
-
+-- to check triggers 
 UPDATE accounts_current SET balance = balance + 1000 WHERE account_id = 3;
 SELECT * FROM accounts_history WHERE account_id = 3;
 
