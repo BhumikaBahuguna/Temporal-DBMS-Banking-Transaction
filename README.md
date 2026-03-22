@@ -1,112 +1,107 @@
-# Temporal-DBMS-Banking-Transaction
-##✨ “Data fades, but history remains — with Temporal DBMS.” 🕰️
+# Temporal-DBMS-Banking-Transaction 🕰️🏦
 
-##🏦💾 Temporal DBMS — Banking Transaction System
+✨ *“Data fades, but history remains — with Temporal DBMS.”*
 
-🔁 A PostgreSQL-powered Temporal Database that keeps track of every account change, enabling time-travel queries and auditable transaction history
+A full-stack banking transaction system demonstrating the power of Temporal Databases. It keeps track of every account change, enabling time-travel queries, auditable transaction histories, and seamless rollback operations.
 
-##⚙️ Project Overview
+---
 
-A Temporal Database Management System (T-DBMS) designed for banking applications that stores complete transaction and balance history, not just the latest balance.
+## ⚙️ Project Overview
+Traditionally, banking applications only store the latest balance. This project implements a **Temporal Database Management System (T-DBMS)** that stores complete transaction and balance histories. 
 
-💡 Implemented using PostgreSQL with database triggers to automatically maintain two tables:
+Originally built using MySQL, this project has been fully refactored to use a **Portable SQLite Database** alongside a modern **React (Vite) Frontend** and a **Python Flask API Backend**.
 
-🧾 Current Table → Holds the latest account state
+💡 **How it works:**  
+The database utilizes SQLite **Triggers** to automatically maintain two core tables:
+1. `accounts_current` → Holds the latest account state.
+2. `accounts_history` → Automatically logs every past transaction, balance update, and deletion.
 
-⏳ History Table → Stores every past transaction and balance update
+---
 
-##🧭 Purpose
+## 🌟 Key Features
+- **Automatic History Tracking:** Triggers silently and instantly record every insertion, transfer, or deletion.
+- **Time-Travel AS-OF Queries:** Reconstruct what a user's balance and state looked like at *any* specific date and time in the past.
+- **Point-in-Time Rollback:** Instantly rewind an account's balance back to a historical state safely, which is subsequently logged as a `ROLLBACK` transaction.
+- **Modern Architecture:** A decoupled RESTful JSON API using Flask and a sleek UI powered by React, Tailwind-like CSS, and Framer Motion.
 
-To maintain an immutable, queryable record of all account states and changes for each banking transaction.
+---
 
-You can even ask:
+## 🛠️ Tech Stack
+* **Frontend:** React.js, Vite, React Router, Recharts, Framer Motion
+* **Backend:** Python 3, Flask, Flask-CORS
+* **Database:** SQLite (Embedded, zero-configuration)
 
-💬 “What was the balance of Account #123 on March 10th?”
+---
 
-and get the answer directly from the database!
+## 🚀 Getting Started (VS Code)
 
-##🌟 Key Features
+Because the project is entirely portable, you do not need XAMPP, MySQL, or PostgreSQL installed to run this project!
 
-✅ Automatic History Tracking
-→ PostgreSQL triggers record every update, insert, or delete automatically.
+### 1. Prerequisites
+- **Python 3.x** installed.
+- **Node.js** installed.
 
-✅ Time-Travel Queries
-→ Retrieve past balances and transactions at any date or time.
-
-✅ Auditing & Compliance
-→ Perfect for fraud detection, financial audits, and rollback checks.
-
-✅ Error Correction
-→ View and restore old account states safely.
-
-##🗂️ Database Flow
-
-```
-             ┌────────────────────────────┐
-             │        Transactions         │
-             └──────────────┬─────────────┘
-                            │
-                 (TRIGGER fires automatically)
-                            │
-       ┌────────────────────┴────────────────────┐
-       │                                         │
-┌───────────────┐                       ┌────────────────┐
-│ Current Table │   <-- latest state --> │ History Table  │
-└───────────────┘                       └────────────────┘
-        │                                         │
-        ▼                                         ▼
-   User Queries                            Time-Travel Queries
-```
-
-##🚀 Getting Started
-
-Clone this repository
-
-git clone https://github.com/your-username/Temporal-DBMS-Banking-Transaction.git
+### 2. Initialization & Setup
+Clone the repository and open it in VS Code:
+```bash
+git clone https://github.com/BhumikaBahuguna/Temporal-DBMS-Banking-Transaction.git
 cd Temporal-DBMS-Banking-Transaction
+```
 
+**Set up the Python Backend & Database:**
+Open a terminal in the root folder and run:
+```powershell
+# Create a virtual environment
+python -m venv .venv
+.\.venv\Scripts\activate
 
-Set up PostgreSQL
-Import the provided table and trigger SQL scripts.
+# Install dependencies
+pip install flask flask-cors
 
-Insert Sample Data
-Run example inserts to simulate transactions.
+# Initialize the database (Seeds data from accounts.csv into temporal_bank.db)
+python init_db.py
+```
 
-Run Queries
+**Set up the React Frontend:**
+Open a second terminal, navigate to the `client` folder, and run:
+```powershell
+cd client
+npm install
+```
 
-SELECT * FROM current_accounts;
-SELECT * FROM history_accounts;
+---
 
-##🧪 Testing the Temporal Behavior
+## 💻 Running the Application
 
-Perform inserts and updates on the current_accounts table —
-each change will automatically be recorded in the history_accounts table via triggers.
+There are two ways to start the project. 
 
-🧭 Example:
+### Method A: One-Click Quick Start (Windows)
+Double-click the **`run.bat`** file in the root folder. It will automatically open the required terminals and boot both servers simultaneously.
 
-UPDATE current_accounts 
-SET balance = balance - 200 
-WHERE account_id = 123;
+### Method B: Manual Split Terminal (VS Code)
+If you prefer running it manually within VS Code, open **two split terminal windows** (`Ctrl + Shift + 5`).
 
-SELECT * FROM history_accounts;
+**Terminal 1 (Backend API):**
+```powershell
+# Make sure you are in the root directory
+.\.venv\Scripts\python.exe app.py
+```
+*(Runs on http://127.0.0.1:5000)*
 
+**Terminal 2 (Frontend UI):**
+```powershell
+# Make sure you are in the /client directory
+cd client
+npm run dev
+```
+*(Runs on http://localhost:5173)*
 
-👉 You’ll see both old and new states logged automatically!
+You can now open `http://localhost:5173` in your browser and start executing transactions!
 
-##🌍 Real-World Applications
+---
 
-🔍 Fraud Detection – Track suspicious transactions over time.
-📊 Audit & Compliance – Keep complete transaction trails for regulators.
-🧩 Error Recovery – Restore old account states when corrections are needed.
-
-##🛠️ Tech Stack
-
-🐘 PostgreSQL (Database Engine)
-
-⚙️ SQL Triggers & Functions (Automation Layer)
-
-💻 SQL Client / pgAdmin (Query Interface)
-
-##🏁 Summary
-
-This Temporal-DBMS-Banking-Transaction project showcases how temporal data modeling and PostgreSQL triggers can be used to create a time-aware, self-auditing banking database — perfect for modern financial systems that demand transparency and historical insight.
+## 🧪 Testing the Temporal Behavior
+1. **Navigate to "New Transaction"** and deposit ₹5,000 into an account.
+2. Observe the account's history timeline automatically update in the dashboard via SQLite triggers.
+3. **Navigate to the "AS-OF Query"** page. Enter the account ID and pick a timestamp from *before* you made the deposit. The database will accurately rebuild the old balance!
+4. **Use the "Rollback"** page to officially undo the deposit, reverting the account to its previous balance state permanently.
