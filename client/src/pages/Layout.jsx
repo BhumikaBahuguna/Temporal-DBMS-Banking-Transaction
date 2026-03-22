@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, Outlet } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Home, 
@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import './Layout.css';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
@@ -125,7 +125,7 @@ const Layout = ({ children }) => {
             transition={{ duration: 0.3 }}
             className="page-content"
           >
-            {children}
+            <Outlet />
           </motion.div>
         </div>
       </main>

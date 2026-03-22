@@ -1,0 +1,12 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.db
+temporal_bank.db
+temporal_bank.sqlite3
+
+# Node / React
+client/node_modules/
+client/dist/
+.DS_Store
